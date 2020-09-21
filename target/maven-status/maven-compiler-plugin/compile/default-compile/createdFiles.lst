@@ -1,0 +1,5 @@
+Main.class
+verticles/Server.class
+service/BarringService.class
+kafka/Producer.class
+kafka/Producer$TestCallback.class
