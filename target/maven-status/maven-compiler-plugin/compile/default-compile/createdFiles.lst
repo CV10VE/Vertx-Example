@@ -1,4 +1,5 @@
 Main.class
+kafka/Consumer.class
 verticles/Server.class
 service/BarringService.class
 kafka/Producer.class

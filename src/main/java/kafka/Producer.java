@@ -20,7 +20,6 @@ public class Producer extends AbstractVerticle {
     KafkaProducer<String, String> producer;
     TestCallback callback;
 
-
     /**
      * Method to create producer to sent events
      */

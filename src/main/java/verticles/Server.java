@@ -1,5 +1,6 @@
 package verticles;
 
+import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.Json;
 import io.vertx.reactivex.core.AbstractVerticle;
 import io.vertx.core.logging.Logger;
@@ -20,7 +21,7 @@ public class Server extends AbstractVerticle {
     private Producer producer;
 
     public void start() {
-
+       // HttpServerOptions options = new HttpServerOptions().setLogActivity(true);
         HttpServer server = vertx.createHttpServer();
         Router router = Router.router(vertx);
         barringService = new BarringService();

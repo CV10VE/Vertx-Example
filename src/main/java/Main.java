@@ -5,6 +5,7 @@ import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import io.vertx.reactivex.core.AbstractVerticle;
 import io.vertx.reactivex.core.Vertx;
+import kafka.Consumer;
 import kafka.Producer;
 import verticles.Server;
 
@@ -24,14 +25,19 @@ public class Main extends AbstractVerticle {
         defaultDeploymentOptions.setInstances(1);
         VertxOptions vertxOptions = new VertxOptions();
 
+        //Enable High Availability, if verticle dies then verticle redeployed in another instance
+        //vertxOptions.setHAEnabled(true);
+
         final Vertx vertx = Vertx.vertx(vertxOptions);
         vertx.rxDeployVerticle(Producer.class.getName(), defaultDeploymentOptions).subscribe(verticleID -> {
-            LOGGER.info(String.format("verticle ID %s deployed!", verticleID));
+            LOGGER.info(String.format("verticle Kafka producer with ID %s deployed!", verticleID));
+        });
+        vertx.rxDeployVerticle(Consumer.class.getName(), defaultDeploymentOptions).subscribe(verticleID -> {
+            LOGGER.info(String.format("verticle Kafka consumer with  ID %s deployed!", verticleID));
         });
         vertx.rxDeployVerticle(Server.class.getName(), defaultDeploymentOptions).subscribe(verticleID -> {
             LOGGER.info(String.format("verticle ID %s deployed!", verticleID));
         });
-
 
 
         long endTime = Calendar.getInstance().getTimeInMillis();
