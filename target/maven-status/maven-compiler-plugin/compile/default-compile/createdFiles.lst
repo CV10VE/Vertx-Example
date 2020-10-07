@@ -1,6 +1,7 @@
 Main.class
+service/BarringService.class
 kafka/Consumer.class
 verticles/Server.class
-service/BarringService.class
 kafka/Producer.class
+database/PgDbClient.class
 kafka/Producer$TestCallback.class

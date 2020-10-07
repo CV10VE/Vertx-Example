@@ -22,10 +22,18 @@ services:
     depends_on:
       - zookeeper
       
-  barrings:
-    image: barrings
-    container_name: Barrings
+  db:
+    image: postgres
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=database_barring
     ports:
-    - '8080:8080'
-    depends_on:
-      - kafka
+        - 5432:5432
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

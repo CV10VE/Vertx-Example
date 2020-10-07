@@ -1,3 +1,4 @@
+import database.PgDbClient;
 import io.netty.channel.DefaultChannelId;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.VertxOptions;
@@ -37,6 +38,9 @@ public class Main extends AbstractVerticle {
         });
         vertx.rxDeployVerticle(Server.class.getName(), defaultDeploymentOptions).subscribe(verticleID -> {
             LOGGER.info(String.format("verticle ID %s deployed!", verticleID));
+        });
+        vertx.rxDeployVerticle(PgDbClient.class.getName(), defaultDeploymentOptions).subscribe(verticleID -> {
+            LOGGER.info(String.format("verticle PGclient with ID %s deployed!", verticleID));
         });
 
 

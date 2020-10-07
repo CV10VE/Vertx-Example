@@ -1,5 +1,6 @@
 package verticles;
 
+import database.PgDbClient;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.Json;
 import io.vertx.reactivex.core.AbstractVerticle;
@@ -26,7 +27,6 @@ public class Server extends AbstractVerticle {
         Router router = Router.router(vertx);
         barringService = new BarringService();
         producer = new Producer(vertx);
-
 
         router.get("/getBarrings").produces("*/json").handler(routingContext -> {
             routingContext.response().setChunked(true).end(Json.encodePrettily(barringService.findAll()));
